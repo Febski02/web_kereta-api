@@ -172,7 +172,7 @@
                 <div class="text-center">
                     <h1 class="text-3xl md:text-4xl font-bold mb-4">Selamat Datang di Kereta Api Indonesia</h1>
                     <p class="text-lg md:text-xl mb-6">Perjalanan nyaman dan aman bersama kami</p>
-                    <a href="#" class="btn btn-primary btn-lg">Pesan Tiket Sekarang</a>
+                    <a href="/admin/login" class="btn btn-primary btn-lg">Pesan Tiket Sekarang</a>
                 </div>
             </div>
 

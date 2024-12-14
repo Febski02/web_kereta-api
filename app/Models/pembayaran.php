@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class pembayaran extends Model
 {
     protected $fillable = [
-        'registrasi_id',
+        'id_pelanggan',
         'kode_pembayaran',
         'metode_pembayaran',
         'waktu_pembayaran',
@@ -16,6 +16,6 @@ class pembayaran extends Model
     ];
     public function pendaftaran()
     {
-        return $this->belongsTo(Pendaftaran::class, 'registrasi_id');
+        return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
     }
 }

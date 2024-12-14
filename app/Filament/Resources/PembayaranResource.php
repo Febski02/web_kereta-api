@@ -16,6 +16,7 @@ use App\Filament\Resources\PembayaranResource\RelationManagers;
 class PembayaranResource extends Resource
 {
     protected static ?string $model = Pembayaran::class;
+    protected static ?string $navigationLabel = 'Transaksi';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

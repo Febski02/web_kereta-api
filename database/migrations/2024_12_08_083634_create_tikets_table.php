@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tikets', function (Blueprint $table) {
-            $table->bigIncrements('tiket_id'); // Kolom ID otomatis
-            $table->string('jadwal_kereta'); // Kolom untuk jadwal kereta (tipe string)
-            $table->string('stasiun_keberangkatan'); // Kolom untuk stasiun keberangkatan (tipe string)
-            $table->string('status_tujuan'); // Kolom untuk status tujuan (tipe string)
-            $table->string('nomor_kursi'); // Kolom untuk nomor kursi (tipe string)
-            $table->timestamps(); // Kolom untuk created_at dan updated_at
+            $table->bigIncrements('tiket_id');
+            $table->unsignedBigInteger('jadwal_kereta')->nullable(); // Foreign key for jadwal_kereta
+            $table->unsignedBigInteger('kereta_id')->nullable(); // Foreign key for kereta_id
+            $table->decimal('harga', 15, 2); // Add harga column to store the price of the ticket
+            $table->timestamps();
+            
         });
     }
 

@@ -16,54 +16,44 @@ use App\Filament\Resources\TiketResource\RelationManagers;
 class TiketResource extends Resource
 {
     protected static ?string $model = Tiket::class;
+    protected static ?string $navigationLabel = 'Tiket';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('jadwal_kereta')
-                ->required()
-                ->label('Jadwal Kereta')
-                ->inputMode('numeric'), // Bisa diubah menjadi input mode lain sesuai kebutuhan
-            Forms\Components\TextInput::make('stasiun_keberangkatan')
-                ->required()
-                ->label('Stasiun Keberangkatan')
-                ->inputMode('text'), // Digunakan untuk stasiun sebagai string
-            Forms\Components\TextInput::make('status_tujuan')
-                ->required()
-                ->label('Status Tujuan')
-                ->inputMode('text'), // Digunakan untuk status sebagai string
-            Forms\Components\TextInput::make('nomor_kursi')
-                ->required()
-                ->label('Nomor Kursi')
-                ->inputMode('numeric'), // Bisa tetap numeric jika ingin memvalidasi input angka
-        ]);
+            Forms\Components\Select::make('kereta_id')
+            ->label('Nama Kereta')
+            ->relationship('kereta', 'nama_kereta') // Relasi ke Kereta
+            ->required(),
+
+        Forms\Components\Select::make('jadwal_id')
+            ->label('Jadwal (Waktu Berangkat)')
+            ->relationship('jadwal', 'waktu_berangkat') // Relasi ke Jadwal
+            ->required(),
+            Forms\Components\TextInput::make('harga')
+            ->label('Harga Tiket')
+            ->required()
+            ->numeric()
+            ->maxLength(15),
+
+
+       
+
+        Forms\Components\TextInput::make('nomor_kursi')
+            ->required()
+            ->numeric()
+            ->maxLength(5),
+    ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('tiket_id')
-                ->label('ID Tiket')
-                ->sortable()
-                ->searchable(),
-            Tables\Columns\TextColumn::make('jadwal_kereta')
-                ->label('Jadwal Kereta')
-                ->sortable()
-                ->searchable(),
-            Tables\Columns\TextColumn::make('stasiun_keberangkatan')
-                ->label('Stasiun Keberangkatan')
-                ->sortable()
-                ->searchable(),
-            Tables\Columns\TextColumn::make('status_tujuan')
-                ->label('Status Tujuan')
-                ->sortable()
-                ->searchable(),
-            Tables\Columns\TextColumn::make('nomor_kursi')
-                ->label('Nomor Kursi')
-                ->sortable()
-                ->searchable(),
+            Tables\Columns\TextColumn::make('kereta.nama_kereta')->label('Nama Kereta'), Tables\Columns\TextColumn::make('jadwal.waktu_berangkat')->label('Waktu Berangkat'),
+            Tables\Columns\TextColumn::make('harga')->label('Harga'),
+            
         ])
             ->filters([
                 //
